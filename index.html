@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Awesome Phishing Bot · docs</title>
+  <!-- Google Font & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #0b1b2f; /* deep blue base */
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* main card — like a cartoon storybook */
+    .doc-wrapper {
+      max-width: 1300px;
+      width: 100%;
+      background: linear-gradient(145deg, #1d3b5c, #0f2842);
+      border-radius: 60px 60px 40px 40px;
+      padding: 2.5rem 2.8rem 3rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 4px #6ec3ff, 0 0 0 8px #ffd966;
+      position: relative;
+      transition: 0.3s;
+      border: 2px solid #ffb347;
+    }
+
+    /* cartoon cloud decorations */
+    .doc-wrapper::before {
+      content: "☁️ ☁️ ☁️";
+      position: absolute;
+      top: -30px;
+      left: 20px;
+      font-size: 2.8rem;
+      opacity: 0.3;
+      letter-spacing: 20px;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 6px rgba(0,0,0,0.2));
+    }
+
+    /* header with rainbow underline */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.2rem;
+      border-bottom: 6px dotted #f9d56e;
+      padding-bottom: 1rem;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-icon {
+      font-size: 3.4rem;
+      filter: drop-shadow(0 8px 6px #00000055);
+      animation: wobble 3s infinite ease-in-out;
+    }
+
+    @keyframes wobble {
+      0%,100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(6deg) scale(1.1); }
+      75% { transform: rotate(-6deg) scale(1.05); }
+    }
+
+    .title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #feda75, #ffb347, #ff7eb3, #6ec3ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 4px 20px rgba(255, 200, 0, 0.3);
+      letter-spacing: 1px;
+    }
+
+    .title small {
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: #ffdb7c;
+      color: #0b1b2f;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      margin-left: 14px;
+      display: inline-block;
+      box-shadow: 0 4px 0 #b37b2e;
+    }
+
+    .badge-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: #204b6f;
+      padding: 0.5rem 1.2rem;
+      border-radius: 60px;
+      color: #f1f9ff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: inset 0 -4px 0 #102433, 0 6px 12px rgba(0,0,0,0.3);
+      border: 1px solid #7fc9ff;
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge i {
+      color: #ffd966;
+      font-size: 1.2rem;
+    }
+
+    /* animation info box */
+    .banner-box {
+      background: #204165;
+      border-radius: 40px;
+      padding: 1.4rem 2rem;
+      margin-bottom: 2.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border: 3px solid #ffbb77;
+      box-shadow: 0 12px 0 #0e1e32, inset 0 -6px 0 #3f6a91;
+      background-image: radial-gradient(circle at 20% 30%, #3f7aa8 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .banner-text {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #f9f3d9;
+    }
+
+    .banner-text i {
+      font-size: 2.4rem;
+      color: #ffd966;
+      animation: float 2.6s infinite alternate;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-8px) rotate(6deg); }
+    }
+
+    .banner-emoji {
+      font-size: 2rem;
+      filter: drop-shadow(0 4px 4px #00000055);
+    }
+
+    .btn-install {
+      background: #ffb347;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #0b1b2f;
+      box-shadow: 0 8px 0 #a8681e, 0 8px 16px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: 0.08s linear;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 2px solid #ffe28a;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .btn-install:active {
+      transform: translateY(6px);
+      box-shadow: 0 2px 0 #a8681e;
+    }
+
+    .btn-install i {
+      font-size: 1.5rem;
+    }
+
+    /* step by step install – cartoon cards */
+    .step-section {
+      margin: 2.8rem 0 2.5rem;
+    }
+
+    .step-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffd966;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 2rem;
+      text-shadow: 0 4px 0 #1f3b57;
+    }
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+
+    .step-card {
+      background: #1a3857;
+      padding: 1.8rem 1.2rem;
+      border-radius: 40px 20px 40px 20px;
+      border: 3px solid #ffb882;
+      box-shadow: 0 12px 0 #0d1f31, inset 0 -4px 0 #3f6a8f;
+      transition: 0.2s;
+      color: #e7f0fa;
+      position: relative;
+      backdrop-filter: blur(2px);
+      background-image: linear-gradient(145deg, #214e72, #14324b);
+    }
+
+    .step-card:hover {
+      transform: scale(1.02) translateY(-6px);
+      border-color: #ffd966;
+    }
+
+    .step-number {
+      display: inline-block;
+      background: #fecb6e;
+      color: #0b1b2f;
+      font-size: 1.8rem;
+      font-weight: 700;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 48px;
+      box-shadow: 0 6px 0 #a77b3a;
+      margin-bottom: 1rem;
+      border: 2px solid #ffe28a;
+    }
+
+    .step-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+      color: #ffdb8a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .step-card code {
+      background: #0b1f31;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      color: #b4e0ff;
+      font-size: 0.8rem;
+      border: 1px solid #3f7aab;
+    }
+
+    .step-card .cli {
+      background: #102433;
+      padding: 0.8rem;
+      border-radius: 20px;
+      margin-top: 0.8rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      border-left: 6px solid #f9b84a;
+      color: #c7e2ff;
+    }
+
+    /* features / cartoon pills */
+    .features-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 2.2rem 0;
+      justify-content: center;
+    }
+
+    .feature-pill {
+      background: #1f4d70;
+      padding: 0.6rem 1.6rem;
+      border-radius: 60px;
+      border: 2px solid #5fb0ff;
+      color: #f0f9ff;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 6px 0 #0c2942;
+      font-size: 0.95rem;
+      transition: 0.1s;
+    }
+
+    .feature-pill i {
+      color: #feda75;
+      font-size: 1.2rem;
+    }
+
+    .feature-pill:hover {
+      transform: scale(1.05);
+      background: #2b618b;
+    }
+
+    /* code block / terminal animation */
+    .terminal-demo {
+      background: #0d1f30;
+      border-radius: 30px;
+      padding: 1.8rem;
+      margin: 2rem 0 1.5rem;
+      border: 4px solid #65b5ff;
+      box-shadow: inset 0 0 30px #00000055, 0 12px 0 #0c1f31;
+      font-family: 'Courier New', monospace;
+      color: #b5e0ff;
+      position: relative;
+    }
+
+    .terminal-demo .line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.2rem 0;
+      border-bottom: 1px dashed #2f5a7a;
+    }
+
+    .terminal-demo .prompt {
+      color: #feda75;
+      font-weight: 700;
+    }
+
+    .terminal-demo .cmd {
+      color: #7fc9ff;
+    }
+
+    .blink-cursor {
+      display: inline-block;
+      width: 10px;
+      height: 22px;
+      background: #7fc9ff;
+      animation: blink 1s step-end infinite;
+      margin-left: 6px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .typing-animation .line:last-child .cmd::after {
+      content: "|";
+      animation: blink 0.9s step-end infinite;
+    }
+
+    /* footer cartoon */
+    .footer-note {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-top: 4px dashed #f9b84a;
+      padding-top: 2rem;
+      color: #bfd9f0;
+    }
+
+    .footer-note i {
+      color: #ffbb77;
+      font-size: 1.6rem;
+      margin-right: 6px;
+    }
+
+    .fun-stamp {
+      background: #fea82f;
+      color: #0b1b2f;
+      padding: 0.4rem 1.6rem;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transform: rotate(-4deg);
+      border: 3px solid #f9d56e;
+      box-shadow: 0 6px 0 #8f5f1e;
+    }
+
+    @media (max-width: 700px) {
+      .doc-wrapper { padding: 1.5rem; }
+      .title { font-size: 2rem; }
+      .banner-box { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .step-grid { grid-template-columns: 1fr; }
+    }
+
+    /* 3d button for fun */
+    .btn-ghost {
+      background: transparent;
+      border: 3px solid #feda75;
+      padding: 0.5rem 1.4rem;
+      border-radius: 60px;
+      color: #feda75;
+      font-weight: 700;
+      box-shadow: 0 6px 0 #8f6b2e;
+      transition: 0.07s;
+      cursor: pointer;
+    }
+    .btn-ghost:active {
+      transform: translateY(6px);
+      box-shadow: 0 0px 0 #8f6b2e;
+    }
+  </style>
+</head>
+<body>
+  <div class="doc-wrapper">
+    <!-- header -->
+    <div class="header">
+      <div class="logo-area">
+        <span class="logo-icon">🤖🌀</span>
+        <span class="title">Awesome Phishing Bot <small>v5.5.0</small></span>
+      </div>
+      <div class="badge-group">
+        <span class="badge"><i class="fas fa-bolt"></i> 5000+ cmds</span>
+        <span class="badge"><i class="fas fa-robot"></i> 6 platforms</span>
+        <span class="badge"><i class="fas fa-shield-alt"></i> SSH + traffic</span>
+      </div>
+    </div>
+
+    <!-- animated banner -->
+    <div class="banner-box">
+      <div class="banner-text">
+        <i class="fas fa-star"></i>
+        <span>🎣 50+ phishing templates · cartoon‑secure</span>
+        <span class="banner-emoji">✨</span>
+      </div>
+      <button class="btn-install" id="installBtn"><i class="fas fa-download"></i> Install now</button>
+    </div>
+
+    <!-- STEP BY STEP INSTALL (cartoon style) -->
+    <div class="step-section">
+      <div class="step-title">
+        <span>📦 STEP‑BY‑STEP</span>
+        <span style="font-size: 1.8rem;">🛠️</span>
+      </div>
+      <div class="step-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3><i class="fab fa-python" style="color:#ffb347;"></i> Clone & install</h3>
+          <p>Get the source and install dependencies with pip.</p>
+          <div class="cli">git clone https://github.com/Iankulani/awesome_phishing_bot_v5.5.0.git<br>cd awesome-bot && pip install -r requirements.txt</div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3><i class="fas fa-key" style="color:#feda75;"></i> Configure tokens</h3>
+          <p>Set your <strong>Telegram</strong>, <strong>Discord</strong> or <strong>Slack</strong> tokens.</p>
+          <div class="cli">python config.py --discord "your_token"</div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3><i class="fas fa-play" style="color:#7fc9ff;"></i> Launch & test</h3>
+          <p>Run the bot and try <code>phish_facebook</code> or <code>traffic_icmp</code>.</p>
+          <div class="cli">python awesome_phishing.py<br> > phish_facebook</div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3><i class="fas fa-cloud" style="color:#b4e0ff;"></i> Multi‑platform</h3>
+          <p>Connect WhatsApp, iMessage, Google Chat and more.</p>
+          <div class="cli">/discord_config &nbsp; /telegram_config</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- interactive terminal animation -->
+    <div class="terminal-demo" id="terminalDemo">
+      <div class="line"><span class="prompt">🌿></span> <span class="cmd">help</span></div>
+      <div class="line"><span class="prompt">🌿></span> <span class="cmd">phish_instagram  →  link generated 🎣</span></div>
+      <div class="line"><span class="prompt">🌿></span> <span class="cmd">ssh_connect myserver 192.168.1.100 root 🔐</span></div>
+      <div class="line typing-animation"><span class="prompt">🌿></span> <span class="cmd">traffic_icmp 8.8.8.8 100 🚀</span><span class="blink-cursor"></span></div>
+    </div>
+
+    <!-- feature pills -->
+    <div class="features-flex">
+      <span class="feature-pill"><i class="fas fa-fish"></i> 50+ phishing</span>
+      <span class="feature-pill"><i class="fas fa-terminal"></i> 5000+ commands</span>
+      <span class="feature-pill"><i class="fas fa-phone-alt"></i> Telegram · Discord · Slack</span>
+      <span class="feature-pill"><i class="fas fa-wifi"></i> ICMP/TCP/UDP/HTTP</span>
+      <span class="feature-pill"><i class="fas fa-shield-virus"></i> Shodan · Hunter.io</span>
+      <span class="feature-pill"><i class="fas fa-qrcode"></i> QR + short URLs</span>
+    </div>
+
+    <!-- cartoon footer -->
+    <div class="footer-note">
+      <div>
+        <i class="fas fa-rocket"></i> <span style="font-weight:600;">Ian Carter Kulani</span> · <span style="color:#ffbb77;">#cyber‑green</span>
+      </div>
+      <div>
+        <i class="fas fa-heart" style="color:#ff7eb3;"></i> Made with <span style="color:#feda75;">★</span> for security education
+      </div>
+      <span class="fun-stamp"><i class="fas fa-crown"></i> AWESOME</span>
+    </div>
+
+    <!-- hidden toast / notification -->
+    <div id="toast" style="position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#204b6f; color:#ffdb8a; padding:1rem 2.4rem; border-radius:80px; border:3px solid #ffb882; box-shadow:0 12px 0 #0b1b2f; font-weight:700; display:none; backdrop-filter:blur(4px); z-index:999; font-size:1.2rem; gap:12px; align-items:center;">
+      <i class="fas fa-check-circle" style="color:#6fcf97;"></i> <span id="toastMsg">Installed! 🎉</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // install button animated feedback
+      const installBtn = document.getElementById('installBtn');
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+
+      function showToast(msg) {
+        toastMsg.innerText = msg || '✨ Installed successfully!';
+        toast.style.display = 'flex';
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 2800);
+      }
+
+      installBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        // cartoon feedback
+        this.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> installing…';
+        this.disabled = true;
+        setTimeout(() => {
+          this.innerHTML = '<i class="fas fa-check-circle"></i> done!';
+          this.style.background = '#6fcf97';
+          this.style.boxShadow = '0 8px 0 #2b7a4a';
+          showToast('✅ Awesome Phishing Bot installed! Step 1–4 complete.');
+          setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-download"></i> Install now';
+            this.style.background = '#ffb347';
+            this.style.boxShadow = '0 8px 0 #a8681e';
+            this.disabled = false;
+          }, 2000);
+        }, 1200);
+      });
+
+      // add typewriter effect to terminal (extra fun)
+      const terminal = document.getElementById('terminalDemo');
+      if (terminal) {
+        const lines = terminal.querySelectorAll('.line');
+        let idx = 0;
+        function typeNext() {
+          if (idx < lines.length) {
+            const line = lines[idx];
+            const cmdSpan = line.querySelector('.cmd');
+            if (cmdSpan && !line.classList.contains('typing-animation')) {
+              const text = cmdSpan.innerText;
+              cmdSpan.innerText = '';
+              let charIndex = 0;
+              const interval = setInterval(() => {
+                if (charIndex < text.length) {
+                  cmdSpan.innerText += text.charAt(charIndex);
+                  charIndex++;
+                } else {
+                  clearInterval(interval);
+                  idx++;
+                  setTimeout(typeNext, 400);
+                }
+              }, 45);
+            } else {
+              idx++;
+              setTimeout(typeNext, 300);
+            }
+          } else {
+            // loop back
+            idx = 0;
+            setTimeout(typeNext, 2000);
+          }
+        }
+        // start typing after a pause
+        setTimeout(typeNext, 800);
+      }
+
+      // random cartoon effect on badge clicks (playful)
+      document.querySelectorAll('.feature-pill, .badge').forEach(el => {
+        el.addEventListener('click', function() {
+          const emojis = ['', '✨', '🎣', '🤖', '🚀', '💡', '⭐', '🌀'];
+          const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+          showToast(`${randomEmoji}  awesome!  ${randomEmoji}`);
+        });
+      });
+
+      // extra: floating bubbles animation on banner (just for show)
+      const banner = document.querySelector('.banner-box');
+      if (banner) {
+        setInterval(() => {
+          const bubble = document.createElement('span');
+          bubble.innerText = '●';
+          bubble.style.position = 'absolute';
+          bubble.style.color = '#feda7544';
+          bubble.style.fontSize = (Math.random() * 20 + 10) + 'px';
+          bubble.style.left = Math.random() * 90 + '%';
+          bubble.style.top = '-20px';
+          bubble.style.pointerEvents = 'none';
+          bubble.style.transition = 'all 3s ease-in-out';
+          bubble.style.opacity = '0.7';
+          banner.style.position = 'relative';
+          banner.appendChild(bubble);
+          setTimeout(() => {
+            bubble.style.transform = `translateY(${Math.random() * 60 + 20}px)`;
+            bubble.style.opacity = '0';
+          }, 20);
+          setTimeout(() => {
+            if (bubble.parentNode) bubble.remove();
+          }, 4000);
+        }, 1800);
+      }
+    })();
+  </script>
+</body>
+</html>
